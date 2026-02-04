@@ -1,0 +1,40 @@
+[
+  {
+    "image_id": 12424,
+    "conversational_turns": [
+      {
+        "question": "Find the guy whose elbow is touching the batter's glove.",
+        "bboxes": [
+          [101, 7, 221, 253]
+        ]
+      },
+      {
+        "question": "Find the person on the far left.",
+        "bboxes": [
+          [9, 9, 121, 255]
+        ]
+      },
+      {
+        "question": "Find the baseball player wearing number 18.",
+        "bboxes": [
+          [205, 22, 511, 412]
+        ]
+      },
+      {
+        "question": "Find the person closer to the front person <box>{context_bbox}</box>.",
+        "context_from_turn": 0,
+        "bboxes": [
+          [9, 9, 121, 255]
+        ]
+      },
+      {
+        "question": "Find the person to the right of <box>{context_bbox}</box> who is closest to him.",
+        "context_from_turn": 1,
+        "bboxes": [
+          [101, 7, 221, 253]
+        ]
+      }
+    ],
+    "image_path": "refcocoplus_test_multi_bbox_images/12424.jpg"
+  }
+  ]
