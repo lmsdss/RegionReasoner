@@ -259,7 +259,7 @@ class FSDPWorker(Worker):
         )
         rollout_device_mesh = init_device_mesh("cuda", mesh_shape=(dp_size, tp_size), mesh_dim_names=["dp", "tp"])
         log_gpu_memory_usage("Before building vllm rollout")
-        self.rollout = vLLMRollout( # 构建rollout实例
+        self.rollout = vLLMRollout( # Build the rollout instance.
             model_path=self.config.actor.model.model_path,
             config=self.config.rollout,
             tokenizer=self.tokenizer,
@@ -337,22 +337,26 @@ class FSDPWorker(Worker):
         if self._use_param_offload:
             load_fsdp_model(self.fsdp_module)
 
-        # 临时设置优化器保存选项
+        # Temporarily override the optimizer checkpoint setting.
         original_save_optimizer = self.checkpoint_manager.save_optimizer
-        self.checkpoint_manager.save_optimizer = save_optimizer
-        
-        self.checkpoint_manager.save_checkpoint(
-            local_path=path,
-            global_step=global_step,
-            remove_previous_ckpt=remove_previous_ckpt,
-        )
-        
-        # 恢复原始设置
-        self.checkpoint_manager.save_optimizer = original_save_optimizer
-        
-        dist.barrier()
-        if self._use_param_offload:
-            offload_fsdp_model(self.fsdp_module)
+        save_succeeded = False
+        try:
+            self.checkpoint_manager.save_optimizer = save_optimizer
+
+            self.checkpoint_manager.save_checkpoint(
+                local_path=path,
+                global_step=global_step,
+                remove_previous_ckpt=remove_previous_ckpt,
+            )
+            save_succeeded = True
+        finally:
+            # Restore the original setting even if checkpointing fails.
+            self.checkpoint_manager.save_optimizer = original_save_optimizer
+
+            if save_succeeded:
+                dist.barrier()
+            if self._use_param_offload:
+                offload_fsdp_model(self.fsdp_module)
 
     @register(dispatch_mode=Dispatch.ONE_TO_ALL)
     def load_checkpoint(self, path: str, del_local_after_load: bool = True):
@@ -407,8 +411,8 @@ class FSDPWorker(Worker):
         return output
 
     @register(dispatch_mode=Dispatch.DP_COMPUTE_PROTO) # 
-    # 第一层（分布式调用层）负责分布式处理和数据管理
-    def generate_sequences(self, prompts: DataProto): # 第二层（实际生成层）：vLLMRollout.generate_sequences verl/workers/rollout/vllm_rollout/vllm_rollout_spmd.py:115
+    # The distributed call layer handles distributed processing and data management.
+    def generate_sequences(self, prompts: DataProto): # The generation layer calls vLLMRollout.generate_sequences.
         assert self._is_rollout 
 
         if self._use_param_offload:
@@ -434,7 +438,7 @@ class FSDPWorker(Worker):
             log_gpu_memory_usage("After entering rollout sharding manager")
 
             prompts = self.rollout_sharding_manager.preprocess_data(prompts)
-            output = self.rollout.generate_sequences(prompts=prompts) # 调用rollout的generate_sequences
+            output = self.rollout.generate_sequences(prompts=prompts) # Call rollout.generate_sequences.
             log_gpu_memory_usage("After rollout generation")
 
             output = self.rollout_sharding_manager.postprocess_data(output)
