@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import gc
 import os
 import warnings
 
@@ -46,7 +47,7 @@ class FSDPCheckpointManager(BaseCheckpointManager):
         lr_scheduler: torch.optim.lr_scheduler.LRScheduler,
         tokenizer: PreTrainedTokenizer,
         processor: ProcessorMixin,
-        save_optimizer: bool = True,  # 新增参数：控制是否保存优化器
+        save_optimizer: bool = True,  # Controls whether optimizer state is saved.
         *args,
         **kwargs,
     ):
@@ -101,7 +102,7 @@ class FSDPCheckpointManager(BaseCheckpointManager):
             warnings.simplefilter("ignore")
             with FSDP.state_dict_type(self.model, StateDictType.SHARDED_STATE_DICT, state_dict_cfg, optim_cfg):
                 model_state_dict = self.model.state_dict()
-                if self.optimizer is not None:
+                if self.save_optimizer and self.optimizer is not None:
                     optimizer_state_dict = self.optimizer.state_dict()
                 else:
                     optimizer_state_dict = None
@@ -122,15 +123,20 @@ class FSDPCheckpointManager(BaseCheckpointManager):
                 print(f"[rank-{self.rank}]: Saving extra_state to {os.path.abspath(extra_path)}")
                 torch.save(model_state_dict, model_path)
                 
-                # 根据配置决定是否保存优化器
+                # Save optimizer state only when requested.
                 if self.save_optimizer and optimizer_state_dict is not None:
                     print(f"[rank-{self.rank}]: Saving optimizer to {os.path.abspath(optim_path)}")
                     torch.save(optimizer_state_dict, optim_path)
                 else:
                     if self.rank == 0:
-                        print(f"⏭️  Skipping optimizer save (save_optimizer=False, saved ~64GB)")
+                        print("Skipping optimizer save (save_optimizer=False, saved ~64GB)")
                 
                 torch.save(extra_state_dict, extra_path)
+
+                del model_state_dict, optimizer_state_dict, extra_state_dict
+                gc.collect()
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
 
         # wait for everyone to dump to local
         torch.distributed.barrier()
