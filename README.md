@@ -1,15 +1,30 @@
-# RegionReasoner: Region-Grounded Multi-Round Visual Reasoning (ICLR 2026)
+# RegionReasoner
+
+**Region-Grounded Multi-Round Visual Reasoning · ICLR 2026**
+
+[![Paper](docs/assets/badge-paper.svg)](https://arxiv.org/abs/2602.03733)
+[![Project Page](docs/assets/badge-project.svg)](https://wenfangsun.cn/RegionReasoner/)
+[![Model](docs/assets/badge-model.svg)](https://huggingface.co/lmsdss/RegionReasoner-7B)
+[![Training Data](docs/assets/badge-train-data.svg)](https://huggingface.co/datasets/lmsdss/regionreasoner_data)
+[![Test Data](docs/assets/badge-test-data.svg)](https://huggingface.co/datasets/lmsdss/regionreasoner_test_data)
 
 **RegionReasoner** is a reinforcement learning framework for grounded multi-round visual reasoning, coupled with **RegionDial-Bench** (detection + segmentation), that requires reasoning traces to cite reference bboxes and uses a global–local consistency reward to improve iterative reasoning accuracy and spatial grounding.
 
-- **Paper**: [📖 RegionReasoner](https://arxiv.org/pdf/2602.03733)
-- **Model**: [🤗 `lmsdss/RegionReasoner-7B`](https://huggingface.co/lmsdss/RegionReasoner-7B)
-- **Training dataset**: [🤗 `lmsdss/regionreasoner_data`](https://huggingface.co/datasets/lmsdss/regionreasoner_data)
-- **Test dataset**: [🤗 `lmsdss/regionreasoner_test_data`](https://huggingface.co/datasets/lmsdss/regionreasoner_test_data)
+## Overview
 
+<p align="center">
+  <a href="docs/assets/framework.jpg">
+    <img src="docs/assets/framework.jpg" alt="RegionReasoner multi-round framework: an image and successive queries are processed by the Qwen2.5-VL backbone, with reference citation and global–local consistency rewards supporting grounded predictions." width="100%">
+  </a>
+</p>
+
+Each round produces a structured trajectory: `<scene>` → `<focus>` → `<think>` → `<answer>`. Reference citation and global–local consistency rewards connect reasoning to visual evidence across turns.
+
+Explore the [interactive project page](https://wenfangsun.cn/RegionReasoner/) for an animated walkthrough and experimental results.
 
 ## Contents
 
+- [Overview](#overview)
 - [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Quick Start (Evaluation)](#quick-start-evaluation)
@@ -174,3 +189,4 @@ If you find this project useful, please cite our paper:
   url          = {https://arxiv.org/pdf/2602.03733}
 }
 ```
+
