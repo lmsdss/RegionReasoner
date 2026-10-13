@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" width="340" height="340" style="color:#426b30">
+  <title>VIS LAB logo — editable vector</title>
+  <desc>Vector recreation of the supplied VIS LAB mark. Change the root color property to recolor the entire logo.</desc>
+
+  <g fill="#426b30">
+    <!-- Rounded-square frame -->
+    <path fill-rule="evenodd" d="
+      M62 0 H278
+      C312.24 0 340 27.76 340 62
+      V278 C340 312.24 312.24 340 278 340
+      H62 C27.76 340 0 312.24 0 278
+      V62 C0 27.76 27.76 0 62 0 Z
+
+      M66 24 H274
+      C297.20 24 316 42.80 316 66
+      V274 C316 297.20 297.20 316 274 316
+      H66 C42.80 316 24 297.20 24 274
+      V66 C24 42.80 42.80 24 66 24 Z"/>
+
+    <!-- V -->
+    <path d="M50 71 H62.5 L87 144.5 L113 71 H126 L94 161.5 H81.5 Z"/>
+
+    <!-- I -->
+    <rect x="162" y="71" width="12" height="91" rx="1"/>
+
+    <!-- S -->
+    <path d="M283 76.5 H241
+             C231.5 76.5 225.5 82.5 225.5 91.5
+             V98.5
+             C225.5 104.5 229 108 235 110
+             L272.5 124.5
+             C278.5 126.8 280.5 130.5 280.5 136
+             V141.5
+             C280.5 150.5 274 156 265.5 156
+             H220"
+          fill="none" stroke="#426b30" stroke-width="11"
+          stroke-linecap="butt" stroke-linejoin="round"/>
+
+    <!-- L -->
+    <path d="M63 186 H74 V256.5
+             C74 262 78 265 83 265
+             H117 V276 H81
+             C70.5 276 63 268.5 63 258 Z"/>
+
+    <!-- A -->
+    <path d="M162 186 H174 L206 276 H193 L167.5 202 L142 276 H130 Z"/>
+
+    <!-- B -->
+    <path fill-rule="evenodd" d="
+      M227 186 H270
+      C280 186 288 194 288 204 V214
+      C288 221.5 284 227 278 230
+      C284.5 232.5 288 238 288 246 V258
+      C288 268.5 280 276 270 276 H227
+      C224 276 222 274 222 271 V191
+      C222 188 224 186 227 186 Z
+
+      M233 196 H267
+      C273 196 277 200.5 277 206 V216
+      C277 222 273 226 267 226 H233 Z
+
+      M233 236 H268
+      C273.5 236 277 240.5 277 246 V256
+      C277 262 273 266 267 266 H233 Z"/>
+  </g>
+</svg>

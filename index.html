@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RegionReasoner: Region-Grounded Multi-Round Visual Reasoning. ICLR 2026. Explore an animated explanation, the RegionDial-Bench benchmark, results, code, and model.">
+  <meta name="theme-color" content="#f7f8f2">
+  <meta property="og:title" content="RegionReasoner · ICLR 2026">
+  <meta property="og:description" content="Every turn of reasoning, grounded in the image. Region-Grounded Multi-Round Visual Reasoning.">
+  <meta property="og:image" content="https://wenfangsun.cn/RegionReasoner/assets/social-card.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="RegionReasoner: Region-Grounded Multi-Round Visual Reasoning">
+  <meta name="citation_author" content="Wenfang Sun">
+  <meta name="citation_author" content="Hao Chen">
+  <meta name="citation_author" content="Yingjun Du">
+  <meta name="citation_author" content="Yefeng Zheng">
+  <meta name="citation_author" content="Cees G. M. Snoek">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="International Conference on Learning Representations">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2602.03733">
+  <title>RegionReasoner · ICLR 2026</title>
+  <link rel="canonical" href="https://wenfangsun.cn/RegionReasoner/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<svg class="icon-defs" aria-hidden="true"><defs>
+  <symbol id="i-region" viewBox="0 0 24 24"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+  <symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zm0 0v5h5M8 12h8m-8 4h6"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16"/></symbol>
+  <symbol id="i-model" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10 9-5M12 12 3 7m9 5v10"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V3H3v12h5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 0 6M4 4v6h6"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+</defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="brand" href="#" aria-label="RegionReasoner home"><svg class="icon"><use href="#i-region"/></svg><span>RegionReasoner</span></a>
+  <nav aria-label="Main navigation"><a href="#idea">The idea</a><a href="#method">Method</a><a href="#results">Results</a><a href="#resources">Resources <span aria-hidden="true">↗</span></a></nav>
+  <span class="header-note">ICLR 2026</span>
+</header>
+<main id="main">
+  <section class="hero wrap">
+    <div class="hero-brand">
+      <a class="lab-logo" href="https://ivi.fnwi.uva.nl/vislab/" target="_blank" rel="noopener" aria-label="Video & Image Sense Lab, University of Amsterdam"><img src="assets/vislab-logo.svg" width="64" height="64" alt="VIS LAB"></a>
+      <div class="venue"><span class="venue-dot"></span> ICLR 2026</div>
+    </div>
+    <h1><span>Region</span>Reasoner</h1>
+    <p class="paper-title">Region-Grounded Multi-Round<br class="desktop-break"> Visual Reasoning</p>
+    <div class="authors"><span><a href="https://wenfangsun.cn/" target="_blank" rel="noopener" title="Wenfang Sun’s personal homepage">Wenfang Sun</a><sup>1,*</sup></span><span>Hao Chen<sup>2,*</sup></span><span><a href="https://yingjundu.github.io/" target="_blank" rel="noopener" title="Yingjun Du’s personal homepage">Yingjun Du</a><sup>1</sup></span><span><a href="https://sites.google.com/site/yefengzheng/" target="_blank" rel="noopener" title="Yefeng Zheng’s personal homepage">Yefeng Zheng</a><sup>3,†</sup></span><span><a href="https://www.ceessnoek.info/" target="_blank" rel="noopener" title="Cees G. M. Snoek’s personal homepage">Cees G. M. Snoek</a><sup>1</sup></span></div>
+    <p class="affiliations"><span><sup>1</sup> University of Amsterdam</span><span><sup>2</sup> Anhui University</span><span><sup>3</sup> Westlake University</span></p>
+    <p class="author-notes">* Equal contribution &nbsp; · &nbsp; † Corresponding author</p>
+    <div class="hero-links">
+      <a class="button primary" href="https://arxiv.org/pdf/2602.03733" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg>Paper <span>↗</span></a>
+      <a class="button" href="https://github.com/lmsdss/RegionReasoner" target="_blank" rel="noopener"><svg class="icon"><use href="#i-code"/></svg>Code</a>
+      <a class="button" href="https://huggingface.co/lmsdss/RegionReasoner-7B" target="_blank" rel="noopener"><svg class="icon"><use href="#i-model"/></svg>Model</a>
+      <a class="button" href="#resources"><svg class="icon"><use href="#i-data"/></svg>Dataset</a>
+    </div>
+    <div class="hero-intro"><p>Every turn of reasoning,<br><em>grounded in the image.</em></p><a href="#idea" class="watch-link">Explore the idea <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+  </section>
+
+  <section id="idea" class="demo-section wrap" aria-labelledby="demo-title">
+    <div class="demo-top"><div><span class="live-dot"></span><h2 id="demo-title">One image. Three turns. A chain of evidence.</h2></div><span class="mono">ANIMATED WALKTHROUGH</span></div>
+    <div class="demo-body">
+      <div class="visual-pane">
+        <div class="query-label"><span class="mono" id="round-caption">ROUND 01 / 03</span><span class="query-dot"></span><span>User query</span></div>
+        <p id="query" class="query">Find the player wearing jersey number 18.</p>
+        <div class="image-stage" id="image-stage" data-phase="0">
+          <img src="assets/baseball.jpg" width="850" height="568" alt="A baseball batter wearing jersey number 18, with players standing in the dugout behind him.">
+          <div class="scan-line" aria-hidden="true"></div>
+          <div class="region-box reference-box" id="reference-box"><span id="reference-label">R1 · reference</span></div>
+          <div class="region-box target-box" id="target-box"><span id="target-label">R1 · localized</span></div>
+          <svg class="relation-arrow" viewBox="0 0 640 424" id="relation-arrow" aria-hidden="true"><defs><marker id="arrowhead" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6" fill="none" stroke="#d9f6a7" stroke-width="1.5"/></marker></defs><path id="relation-path" marker-end="url(#arrowhead)"/></svg>
+          <div class="image-badge"><span id="image-status">Reading the whole scene</span></div>
+        </div>
+        <div class="legend"><span><i class="key ref"></i> Previous reference</span><span><i class="key target"></i> Current localization</span></div>
+        <div class="memory"><span class="mono">REGION MEMORY</span><div id="memory-items"><span class="memory-empty">The next turn builds on this one.</span></div></div>
+      </div>
+      <div class="trace-pane">
+        <div class="trace-heading"><span class="mono">STRUCTURED TRAJECTORY</span><span class="trace-step" id="trace-step">01 / 04</span></div>
+        <div class="trace-block active" data-block="0"><div class="trace-block-head"><span class="step-index">01</span><code>&lt;scene&gt;</code><span class="trace-purpose">Global context</span></div><p id="scene-text">A <mark>baseball</mark> game with a <mark>batter</mark> and several <mark>players</mark> in the dugout.</p></div>
+        <div class="trace-block" data-block="1"><div class="trace-block-head"><span class="step-index">02</span><code>&lt;focus&gt;</code><span class="trace-purpose">Local evidence</span></div><p id="focus-text">No prior reference in this turn. Locate the player from the scene.</p></div>
+        <div class="trace-block" data-block="2"><div class="trace-block-head"><span class="step-index">03</span><code>&lt;think&gt;</code><span class="trace-purpose">Cite & relate</span></div><p id="think-text">The foreground <mark>batter</mark> has <mark>18</mark> on his jersey. Ground the answer in that visible player.</p></div>
+        <div class="trace-block" data-block="3"><div class="trace-block-head"><span class="step-index">04</span><code>&lt;answer&gt;</code><span class="trace-purpose">Localize</span></div><pre id="answer-text">{"bbox_2d": [205, 22, 511, 412]}</pre></div>
+        <div class="consistency-strip"><span class="consistency-icon">↔</span><div><strong id="consistency-title">Keep the scene in the loop</strong><span id="consistency-text">Shared objects connect visual evidence and reasoning.</span></div></div>
+      </div>
+    </div>
+    <div class="demo-controls"><div class="playback"><button class="control-button" id="play-button" aria-label="Pause animation"><svg class="icon"><use href="#i-pause"/></svg></button><button class="control-button" id="replay-button" aria-label="Restart animation"><svg class="icon"><use href="#i-replay"/></svg></button><div class="round-tabs" aria-label="Select dialogue turn"><button data-round="0" aria-pressed="true">Round 1</button><button data-round="1" aria-pressed="false">Round 2</button><button data-round="2" aria-pressed="false">Round 3</button></div></div><div class="phase-tabs" aria-label="Select trajectory step"><button data-phase="0" aria-pressed="true">Scene</button><span>→</span><button data-phase="1" aria-pressed="false">Focus</button><span>→</span><button data-phase="2" aria-pressed="false">Think</button><span>→</span><button data-phase="3" aria-pressed="false">Answer</button></div><button class="next-button" id="next-button" aria-label="Advance to next step">Next <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+    <div class="demo-progress"><div id="demo-progress-fill"></div></div>
+    <p class="demo-footnote">Adapted from the paper’s baseball example. Traces and output coordinates are simplified for explanation; this is an animation, not live inference.</p>
+  </section>
+
+  <section class="overview wrap section-space" aria-labelledby="overview-title">
+    <div class="section-heading"><span class="section-number">01 / THE IDEA</span><h2 id="overview-title">Reason with references.<br><em>Stay connected to the scene.</em></h2></div>
+    <div class="overview-copy"><p class="lead">In a visual dialogue, “the person next to that one” only makes sense if <em>that one</em> stays grounded.</p><p>RegionReasoner makes this connection explicit. Each turn carries forward localized regions, cites their bounding boxes in its reasoning, and keeps the reasoning aligned with both the whole image and the referenced region.</p><p>The result is a verifiable trajectory that supports referring detection and segmentation across multiple turns.</p><details class="abstract"><summary>Read the abstract <span>+</span></summary><p>Large vision-language models have achieved remarkable progress in visual reasoning, yet most existing systems rely on single-step or text-only reasoning, limiting their ability to iteratively refine understanding across multiple visual contexts. To address this limitation, we introduce a new multi-round visual reasoning benchmark with training and test sets spanning both detection and segmentation tasks, enabling systematic evaluation under iterative reasoning scenarios.</p><p>We further propose RegionReasoner, a reinforcement learning framework that enforces grounded reasoning by requiring each reasoning trace to explicitly cite the corresponding reference bounding boxes, while maintaining semantic coherence via a global–local consistency reward. This reward extracts key objects and nouns from both global scene captions and region-level captions, aligning them with the reasoning trace to ensure consistency across reasoning steps.</p><p>RegionReasoner is optimized with structured rewards combining grounding fidelity and global–local semantic alignment. Experiments on detection and segmentation tasks show that RegionReasoner-7B, together with our newly introduced benchmark RegionDial-Bench, considerably improves multi-round reasoning accuracy, spatial grounding precision, and global–local consistency, establishing a strong baseline for this emerging research direction.</p></details></div>
+  </section>
+
+  <section id="method" class="method-section section-space">
+    <div class="wrap">
+      <div class="section-heading inline-heading"><div><span class="section-number">02 / THE METHOD</span><h2>Learning to keep<br><em>the evidence in view.</em></h2></div><p>A 7B vision-language model, optimized with<br>structured rewards for multi-round grounding.</p></div>
+      <div class="method-flow"><div class="flow-input"><svg class="icon"><use href="#i-region"/></svg><strong>Image + query</strong><span>Previous regions & dialogue memory</span></div><span class="flow-arrow">→</span><div class="flow-model"><span class="mono">REGIONREASONER-7B</span><strong>Scene → Focus → Think → Answer</strong><span>Qwen2.5-VL-7B backbone</span></div><span class="flow-arrow">→</span><div class="flow-output"><svg class="icon"><use href="#i-region"/></svg><strong>Grounded prediction</strong><span>Update memory for the next turn</span></div><div class="loop-line"><span>↖ &nbsp; Carry localized regions into the next query</span></div></div>
+      <div class="reward-grid"><article><span class="reward-no">R<sub>ref</sub></span><h3>Explicit reference citation</h3><p>Reasoning must name the reference box it uses. Correct coordinate citations earn reward; hallucinated coordinates are penalized.</p><div class="reward-example"><span class="tiny-label">EVIDENCE THAT CAN BE CHECKED</span><code>“left of bbox=<b>[205, 22, 511, 412]</b>”</code></div></article><article><span class="reward-no purple">R<sub>cons</sub></span><h3>Global–local consistency</h3><p>Keywords from the scene and reference-region captions are aligned with the reasoning. A spatial-language prior encourages explicit relations.</p><div class="reward-example purple-example"><span class="tiny-label">SEMANTICS THAT STAY CONNECTED</span><div><span>scene</span> <b>batter</b> <span>↔ focus ↔ think</span></div></div></article></div>
+      <div class="objective"><span class="mono">TRAINING OBJECTIVE</span><p>R(t) = R<sub>base</sub>(t) + R<sub>ref</sub>(t) + R<sub>cons</sub>(t)</p><span>Optimize structured multi-turn rollouts with GRPO.</span></div>
+    </div>
+  </section>
+
+  <section class="benchmark wrap section-space" aria-labelledby="benchmark-title">
+    <div class="section-heading"><span class="section-number">03 / THE BENCHMARK</span><h2 id="benchmark-title">RegionDial-Bench</h2><p>Evaluating the chain,<br><em>one turn at a time.</em></p></div>
+    <div class="benchmark-content"><p class="lead">A multi-round benchmark built from RefCOCO+ and RefCOCOg, spanning detection and segmentation.</p><div class="dataset-stats"><div><span class="mono">RefCOCO+ MULTI-TURN</span><strong>715 <small>images</small></strong><span>2,355 turns</span></div><div><span class="mono">RefCOCOg MULTI-TURN</span><strong>1,580 <small>images</small></strong><span>4,405 turns</span></div></div><p class="protocol-note">Training propagates ground-truth references. At test time, later queries use the model’s previous predictions—so early errors can carry forward.</p><a class="text-link" href="https://huggingface.co/datasets/lmsdss/regionreasoner_test_data" target="_blank" rel="noopener">Explore the test data <span>↗</span></a></div>
+  </section>
+
+  <section id="results" class="results-section wrap section-space">
+    <div class="section-heading inline-heading"><div><span class="section-number">04 / THE RESULTS</span><h2>Stronger grounding.<br><em>Even at later turns.</em></h2></div><div class="result-highlight"><strong id="result-gain">+17.7</strong><span id="result-gain-label">AP at Round 7 vs. VisionReasoner<br>RefCOCO+ Multi-turn</span></div></div>
+    <div class="results-panel"><div class="chart-toolbar"><div class="segmented" aria-label="Choose task"><button data-task="detection" aria-pressed="true">Detection</button><button data-task="segmentation" aria-pressed="false">Segmentation</button></div><div class="segmented dataset-select" aria-label="Choose dataset"><button data-dataset="plus" aria-pressed="true">RefCOCO+</button><button data-dataset="g" aria-pressed="false">RefCOCOg</button></div></div><div class="chart-heading"><p id="chart-title">Detection · RefCOCO+ Multi-turn</p><span id="chart-metric">AP (%) ↑</span></div><div class="chart-container"><svg id="results-chart" viewBox="0 0 1000 355" role="img" aria-labelledby="chart-accessible-title chart-accessible-desc"><title id="chart-accessible-title">Detection performance over seven dialogue rounds</title><desc id="chart-accessible-desc">Per-round values reproduced from Table 1 of the paper. Full values are available in the table below.</desc></svg><div class="chart-tooltip" id="chart-tooltip" hidden></div></div><div class="chart-legend" id="chart-legend"></div><div class="aggregate-row"><span class="mono">PAPER-REPORTED AGGREGATE</span><div><span>RegionReasoner-7B</span><strong id="aggregate-score">80.7</strong></div><div><span>VisionReasoner-7B</span><strong id="baseline-score">74.8</strong></div><div class="aggregate-delta"><span>Improvement</span><strong id="aggregate-gain">+5.9</strong></div></div><details class="results-details"><summary>View all reported values <span>+</span></summary><div class="table-scroll"><table id="results-table"><caption>Per-round and aggregate results from the paper</caption><thead><tr><th scope="col">Method</th><th scope="col">R1</th><th scope="col">R2</th><th scope="col">R3</th><th scope="col">R4</th><th scope="col">R5</th><th scope="col">R6</th><th scope="col">R7</th><th scope="col">Avg*</th></tr></thead><tbody></tbody></table></div></details><p class="chart-source">Source: Tables 1–2 of the <a href="https://arxiv.org/pdf/2602.03733" target="_blank" rel="noopener">paper</a>. All models shown are 7B. *Aggregate values reproduce the paper’s reported “Avg”.</p></div>
+  </section>
+
+  <section class="qualitative wrap section-space" aria-labelledby="qual-title"><div class="section-heading"><span class="section-number">05 / IN THE WILD</span><h2 id="qual-title">Follow the reference.<br><em>Find the right neighbor.</em></h2></div><div class="qual-copy"><p class="lead">Later queries depend on earlier regions.</p><p>This qualitative example from the paper compares RegionReasoner and VisionReasoner over three turns. Explicit references help maintain the intended chain as the dialogue moves between people in a crowded scene.</p><button class="text-link" id="figure-open">Explore the paper’s example <svg class="icon"><use href="#i-expand"/></svg></button></div><button class="figure-preview" id="figure-preview" aria-label="Open full qualitative figure"><img src="assets/qualitative.webp" alt="Paper Figure 2: a three-round crowd-scene example comparing RegionReasoner with VisionReasoner. RegionReasoner retains the correct reference chain in rounds 2 and 3." width="2020" height="2200" loading="lazy"><span>FIG. 2 · QUALITATIVE COMPARISON <svg class="icon"><use href="#i-expand"/></svg></span></button></section>
+
+  <section id="resources" class="resources-section section-space"><div class="wrap"><div class="section-heading inline-heading"><div><span class="section-number">06 / OPEN RESEARCH</span><h2>Build on RegionReasoner.</h2></div><p>Read, reproduce, and explore.</p></div><div class="resource-list"><a href="https://arxiv.org/pdf/2602.03733" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg><strong>Research paper</strong><span>Method, experiments & analysis</span><b>↗</b></a><a href="https://github.com/lmsdss/RegionReasoner" target="_blank" rel="noopener"><svg class="icon"><use href="#i-code"/></svg><strong>Code</strong><span>Training & evaluation</span><b>↗</b></a><a href="https://huggingface.co/lmsdss/RegionReasoner-7B" target="_blank" rel="noopener"><svg class="icon"><use href="#i-model"/></svg><strong>RegionReasoner-7B</strong><span>Released model checkpoint</span><b>↗</b></a><a href="https://huggingface.co/datasets/lmsdss/regionreasoner_data" target="_blank" rel="noopener"><svg class="icon"><use href="#i-data"/></svg><strong>Training data</strong><span>RegionDial-Bench</span><b>↗</b></a><a href="https://huggingface.co/datasets/lmsdss/regionreasoner_test_data" target="_blank" rel="noopener"><svg class="icon"><use href="#i-data"/></svg><strong>Test data</strong><span>Multi-round evaluation</span><b>↗</b></a></div></div></section>
+
+  <section class="citation wrap section-space" aria-labelledby="cite-title"><div class="citation-heading"><div><span class="section-number">CITATION</span><h2 id="cite-title">If this work helps your research.</h2></div><button class="button" id="copy-citation"><svg class="icon"><use href="#i-copy"/></svg><span>Copy BibTeX</span></button></div><pre id="bibtex">@inproceedings{sun2026regionreasoner,
+  title     = {RegionReasoner: Region-Grounded Multi-Round Visual Reasoning},
+  author    = {Wenfang Sun and Hao Chen and Yingjun Du and
+               Yefeng Zheng and Cees G. M. Snoek},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2602.03733}
+}</pre><p class="copy-status" id="copy-status" role="status"></p></section>
+</main>
+<footer class="wrap"><a class="brand" href="#"><svg class="icon"><use href="#i-region"/></svg><span>RegionReasoner</span></a><p>Region-Grounded Multi-Round Visual Reasoning · ICLR 2026</p><a href="#main">Back to top ↑</a></footer>
+<dialog id="figure-dialog"><div class="dialog-toolbar"><span>Figure 2 · Qualitative multi-round trajectories</span><button id="figure-close" aria-label="Close full figure">Close ×</button></div><img src="assets/qualitative.webp" alt="Full qualitative comparison from Figure 2 of the paper, including three rounds of queries, reasoning traces, bounding boxes and segmentation masks."></dialog>
+<noscript><p class="noscript-note">Enable JavaScript to play the walkthrough and switch result views. Paper, code, model, and dataset links work without it.</p></noscript>
+</body>
+</html>
